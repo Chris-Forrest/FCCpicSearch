@@ -7,7 +7,7 @@ const App = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    console.log('submitted')
+    console.log(searchInput.current.value);
   }
 
   return (
