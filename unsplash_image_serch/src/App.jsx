@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './index.css';
 import axios from 'axios';
@@ -11,6 +11,11 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    fetchImages();
+  }, [page]
+);
 
   const fetchImages = async () => {
     try{
@@ -28,18 +33,20 @@ const App = () => {
     }
   };
 
+  const resetSearch = () =>{
+    setPage(1);
+    fetchImages();
+  };
+
   const handleSearch = (event) => {
     event.preventDefault();
-    console.log(searchInput.current.value);
-    fetchImages();
+    resetSearch();
   };
 
   const handleSelection = (selection) => {
     searchInput.current.value = selection;
-    fetchImages();
+    resetSearch();
   };
-
-  console.log('page',page);
 
   return (
     <div className='container'>
