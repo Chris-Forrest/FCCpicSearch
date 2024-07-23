@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './index.css';
 import axios from 'axios';
 
@@ -68,6 +68,10 @@ const App = () => {
           className='image'
           />
         ))}
+      </div>
+      <div className='button'>
+        {page > 1 && <Button>Previous</Button>}
+        {page < totalPages && <Button>Next</Button>}
       </div>
     </div>
   );
