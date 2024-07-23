@@ -5,6 +5,8 @@ import './index.css';
 const App = () => {
   const searchInput = useRef(null);
 
+  const API_URL = 'https://api.unsplash.com/search/photos';
+
   const handleSearch = (event) => {
     event.preventDefault();
     console.log(searchInput.current.value);
