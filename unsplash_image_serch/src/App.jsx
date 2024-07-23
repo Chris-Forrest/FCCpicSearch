@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './index.css';
 import axios from 'axios';
@@ -12,13 +12,8 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  useEffect(() => {
-    fetchImages();
-  }, [page]
-);
-
-  const fetchImages = async () => {
-    try{
+  const fetchImages = useCallback(async () => {
+    try {
       const { data } = await axios.get(
         `${API_URL}?query=${
           searchInput.current.value
@@ -31,7 +26,12 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [page]);
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages, page]
+);
 
   const resetSearch = () =>{
     setPage(1);
