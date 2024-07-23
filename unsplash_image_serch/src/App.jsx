@@ -9,6 +9,7 @@ const IMAGES_PER_PAGE = 20;
 const App = () => {
   const searchInput = useRef(null);
   const [images, setImages] = useState([]);
+  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
   const fetchImages = async () => {
@@ -16,7 +17,7 @@ const App = () => {
       const { data } = await axios.get(
         `${API_URL}?query=${
           searchInput.current.value
-        }&page=1&per_page=${IMAGES_PER_PAGE}&client_id=${
+        }&page=${page}&per_page=${IMAGES_PER_PAGE}&client_id=${
           import.meta.env.VITE_API_KEY
         }`
       );
