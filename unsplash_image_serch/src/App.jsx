@@ -23,7 +23,6 @@ const App = () => {
       );
       setImages(data.results);
       setTotalPages(data.total_pages);
-      console.log(setImages,setTotalPages);
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +38,8 @@ const App = () => {
     searchInput.current.value = selection;
     fetchImages();
   };
+
+  console.log('page',page);
 
   return (
     <div className='container'>
@@ -70,8 +71,12 @@ const App = () => {
         ))}
       </div>
       <div className='button'>
-        {page > 1 && <Button>Previous</Button>}
-        {page < totalPages && <Button>Next</Button>}
+        {page > 1 && (
+          <Button onClick={() => setPage(page - 1)}>Previous</Button>
+          )}
+        {page < totalPages && (
+          <Button onClick={() => setPage(page + 1)}>Next</Button>
+          )}
       </div>
     </div>
   );
